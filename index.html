@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Física 1 - Vectores, Cinemática y Dinámica</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎯 Simulador de Física 1</h1>
+            <p>Vectores, Cinemática y Dinámica - Visualización Interactiva</p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <button class="nav-btn active" data-section="vectores">📐 Vectores</button>
+            <button class="nav-btn" data-section="cinematica">🚀 Cinemática</button>
+            <button class="nav-btn" data-section="dinamica">⚙️ Dinámica</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- SECCIÓN VECTORES -->
+        <section id="vectores" class="content-section active">
+            <h2>📐 Vectores</h2>
+            <div class="simulator-grid">
+                <!-- Suma de Vectores -->
+                <div class="simulator-card">
+                    <h3>Suma de Vectores (Método del Paralelogramo)</h3>
+                    <canvas id="canvas-suma-vectores" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Vector A - Magnitud:</label>
+                            <input type="range" id="magA" min="10" max="150" value="100" step="1">
+                            <span id="magA-value">100</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Vector A - Ángulo (°):</label>
+                            <input type="range" id="angA" min="0" max="360" value="30" step="1">
+                            <span id="angA-value">30°</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Vector B - Magnitud:</label>
+                            <input type="range" id="magB" min="10" max="150" value="80" step="1">
+                            <span id="magB-value">80</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Vector B - Ángulo (°):</label>
+                            <input type="range" id="angB" min="0" max="360" value="120" step="1">
+                            <span id="angB-value">120°</span>
+                        </div>
+                    </div>
+                    <div class="results">
+                        <h4>Resultados:</h4>
+                        <p id="resultado-suma-vectores"></p>
+                    </div>
+                </div>
+
+                <!-- Producto Punto -->
+                <div class="simulator-card">
+                    <h3>Producto Punto (Escalar)</h3>
+                    <canvas id="canvas-producto-punto" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Vector A - X:</label>
+                            <input type="number" id="dotAx" value="3" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label>Vector A - Y:</label>
+                            <input type="number" id="dotAy" value="4" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label>Vector B - X:</label>
+                            <input type="number" id="dotBx" value="2" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label>Vector B - Y:</label>
+                            <input type="number" id="dotBy" value="1" step="0.1">
+                        </div>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmula: A · B = |A||B|cos(θ) = Ax·Bx + Ay·By</h4>
+                        <p id="resultado-producto-punto"></p>
+                    </div>
+                </div>
+
+                <!-- Producto Cruz -->
+                <div class="simulator-card">
+                    <h3>Producto Cruz (Vectorial) - 3D</h3>
+                    <canvas id="canvas-producto-cruz" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Vector A (x, y, z):</label>
+                            <input type="number" id="cruzAx" value="1" step="0.1" placeholder="x">
+                            <input type="number" id="cruzAy" value="0" step="0.1" placeholder="y">
+                            <input type="number" id="cruzAz" value="0" step="0.1" placeholder="z">
+                        </div>
+                        <div class="input-group">
+                            <label>Vector B (x, y, z):</label>
+                            <input type="number" id="cruzBx" value="0" step="0.1" placeholder="x">
+                            <input type="number" id="cruzBy" value="1" step="0.1" placeholder="y">
+                            <input type="number" id="cruzBz" value="0" step="0.1" placeholder="z">
+                        </div>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmula: A × B = (AyBz - AzBy, AzBx - AxBz, AxBy - AyBx)</h4>
+                        <p id="resultado-producto-cruz"></p>
+                    </div>
+                </div>
+
+                <!-- Descomposición de Vectores -->
+                <div class="simulator-card">
+                    <h3>Descomposición de Vectores</h3>
+                    <canvas id="canvas-descomposicion" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Magnitud:</label>
+                            <input type="range" id="magDecomp" min="10" max="200" value="150" step="1">
+                            <span id="magDecomp-value">150</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Ángulo (°):</label>
+                            <input type="range" id="angDecomp" min="0" max="360" value="45" step="1">
+                            <span id="angDecomp-value">45°</span>
+                        </div>
+                    </div>
+                    <div class="results">
+                        <h4>Componentes:</h4>
+                        <p id="resultado-descomposicion"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CINEMÁTICA -->
+        <section id="cinematica" class="content-section">
+            <h2>🚀 Cinemática</h2>
+            <div class="simulator-grid">
+                <!-- MRU -->
+                <div class="simulator-card">
+                    <h3>Movimiento Rectilíneo Uniforme (MRU)</h3>
+                    <canvas id="canvas-mru" width="500" height="300"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Posición Inicial x₀ (m):</label>
+                            <input type="number" id="mru-x0" value="0" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Velocidad v (m/s):</label>
+                            <input type="range" id="mru-v" min="-50" max="50" value="20" step="1">
+                            <span id="mru-v-value">20 m/s</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Tiempo t (s):</label>
+                            <input type="range" id="mru-t" min="0" max="10" value="5" step="0.1">
+                            <span id="mru-t-value">5 s</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-mru">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmula: x = x₀ + vt</h4>
+                        <p id="resultado-mru"></p>
+                    </div>
+                    <canvas id="grafica-mru" width="500" height="200"></canvas>
+                </div>
+
+                <!-- MRUA -->
+                <div class="simulator-card">
+                    <h3>Movimiento Rectilíneo Uniformemente Acelerado (MRUA)</h3>
+                    <canvas id="canvas-mrua" width="500" height="300"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Posición Inicial x₀ (m):</label>
+                            <input type="number" id="mrua-x0" value="0" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Velocidad Inicial v₀ (m/s):</label>
+                            <input type="range" id="mrua-v0" min="0" max="50" value="10" step="1">
+                            <span id="mrua-v0-value">10 m/s</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Aceleración a (m/s²):</label>
+                            <input type="range" id="mrua-a" min="-10" max="10" value="2" step="0.1">
+                            <span id="mrua-a-value">2 m/s²</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Tiempo t (s):</label>
+                            <input type="range" id="mrua-t" min="0" max="10" value="5" step="0.1">
+                            <span id="mrua-t-value">5 s</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-mrua">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>x = x₀ + v₀t + ½at²</p>
+                        <p>v = v₀ + at</p>
+                        <p>v² = v₀² + 2a(x - x₀)</p>
+                        <p id="resultado-mrua"></p>
+                    </div>
+                    <canvas id="grafica-mrua" width="500" height="200"></canvas>
+                </div>
+
+                <!-- Tiro Parabólico -->
+                <div class="simulator-card full-width">
+                    <h3>Tiro Parabólico</h3>
+                    <canvas id="canvas-tiro-parabolico" width="800" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Velocidad Inicial v₀ (m/s):</label>
+                            <input type="range" id="tp-v0" min="10" max="50" value="30" step="1">
+                            <span id="tp-v0-value">30 m/s</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Ángulo θ (°):</label>
+                            <input type="range" id="tp-angulo" min="0" max="90" value="45" step="1">
+                            <span id="tp-angulo-value">45°</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Altura Inicial y₀ (m):</label>
+                            <input type="range" id="tp-y0" min="0" max="50" value="0" step="1">
+                            <span id="tp-y0-value">0 m</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Gravedad g (m/s²):</label>
+                            <input type="range" id="tp-g" min="1" max="15" value="9.8" step="0.1">
+                            <span id="tp-g-value">9.8 m/s²</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-tp">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>x = v₀cos(θ)t</p>
+                        <p>y = y₀ + v₀sen(θ)t - ½gt²</p>
+                        <p>Alcance máximo: R = (v₀²sen(2θ))/g</p>
+                        <p>Altura máxima: H = y₀ + (v₀²sen²(θ))/(2g)</p>
+                        <p id="resultado-tp"></p>
+                    </div>
+                </div>
+
+                <!-- Movimiento Circular Uniforme -->
+                <div class="simulator-card">
+                    <h3>Movimiento Circular Uniforme (MCU)</h3>
+                    <canvas id="canvas-mcu" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Radio r (m):</label>
+                            <input type="range" id="mcu-r" min="20" max="150" value="100" step="1">
+                            <span id="mcu-r-value">100 m</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Velocidad Angular ω (rad/s):</label>
+                            <input type="range" id="mcu-omega" min="0.1" max="5" value="1" step="0.1">
+                            <span id="mcu-omega-value">1 rad/s</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Tiempo t (s):</label>
+                            <input type="range" id="mcu-t" min="0" max="10" value="0" step="0.1">
+                            <span id="mcu-t-value">0 s</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-mcu">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>v = ωr (velocidad tangencial)</p>
+                        <p>aᶜ = v²/r = ω²r (aceleración centrípeta)</p>
+                        <p>T = 2π/ω (período)</p>
+                        <p>f = ω/(2π) (frecuencia)</p>
+                        <p id="resultado-mcu"></p>
+                    </div>
+                </div>
+
+                <!-- Caída Libre -->
+                <div class="simulator-card">
+                    <h3>Caída Libre</h3>
+                    <canvas id="canvas-caida-libre" width="400" height="500"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Altura Inicial h₀ (m):</label>
+                            <input type="range" id="cl-h0" min="10" max="200" value="100" step="1">
+                            <span id="cl-h0-value">100 m</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Velocidad Inicial v₀ (m/s):</label>
+                            <input type="range" id="cl-v0" min="-20" max="20" value="0" step="1">
+                            <span id="cl-v0-value">0 m/s</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Gravedad g (m/s²):</label>
+                            <input type="range" id="cl-g" min="1" max="15" value="9.8" step="0.1">
+                            <span id="cl-g-value">9.8 m/s²</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-cl">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>y = h₀ + v₀t - ½gt²</p>
+                        <p>v = v₀ - gt</p>
+                        <p>v² = v₀² - 2g(y - h₀)</p>
+                        <p id="resultado-cl"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DINÁMICA -->
+        <section id="dinamica" class="content-section">
+            <h2>⚙️ Dinámica</h2>
+            <div class="simulator-grid">
+                <!-- Segunda Ley de Newton -->
+                <div class="simulator-card">
+                    <h3>Segunda Ley de Newton (F = ma)</h3>
+                    <canvas id="canvas-newton" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Masa m (kg):</label>
+                            <input type="range" id="newton-m" min="1" max="100" value="10" step="1">
+                            <span id="newton-m-value">10 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Fuerza F (N):</label>
+                            <input type="range" id="newton-f" min="0" max="200" value="50" step="1">
+                            <span id="newton-f-value">50 N</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-newton">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmula: F = ma → a = F/m</h4>
+                        <p id="resultado-newton"></p>
+                    </div>
+                </div>
+
+                <!-- Plano Inclinado -->
+                <div class="simulator-card">
+                    <h3>Plano Inclinado</h3>
+                    <canvas id="canvas-plano" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Masa m (kg):</label>
+                            <input type="range" id="plano-m" min="1" max="50" value="10" step="1">
+                            <span id="plano-m-value">10 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Ángulo θ (°):</label>
+                            <input type="range" id="plano-angulo" min="0" max="89" value="30" step="1">
+                            <span id="plano-angulo-value">30°</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Coef. fricción μ:</label>
+                            <input type="range" id="plano-mu" min="0" max="1" value="0.2" step="0.01">
+                            <span id="plano-mu-value">0.2</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Gravedad g (m/s²):</label>
+                            <input type="range" id="plano-g" min="1" max="15" value="9.8" step="0.1">
+                            <span id="plano-g-value">9.8 m/s²</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-plano">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>N = mgcos(θ) (Normal)</p>
+                        <p>Fₓ = mgsen(θ) (Componente paralela)</p>
+                        <p>Fᵣ = μN (Fricción)</p>
+                        <p>a = g(sen(θ) - μcos(θ))</p>
+                        <p id="resultado-plano"></p>
+                    </div>
+                </div>
+
+                <!-- Fricción -->
+                <div class="simulator-card">
+                    <h3>Fuerza de Fricción</h3>
+                    <canvas id="canvas-friccion" width="500" height="300"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Masa m (kg):</label>
+                            <input type="range" id="fric-m" min="1" max="100" value="20" step="1">
+                            <span id="fric-m-value">20 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Fuerza Aplicada F (N):</label>
+                            <input type="range" id="fric-f" min="0" max="300" value="100" step="1">
+                            <span id="fric-f-value">100 N</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Coef. fricción estática μₛ:</label>
+                            <input type="range" id="fric-mus" min="0" max="1" value="0.5" step="0.01">
+                            <span id="fric-mus-value">0.5</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Coef. fricción cinética μₖ:</label>
+                            <input type="range" id="fric-muk" min="0" max="1" value="0.3" step="0.01">
+                            <span id="fric-muk-value">0.3</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-fric">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>Fₛ ≤ μₛN (fricción estática)</p>
+                        <p>Fₖ = μₖN (fricción cinética)</p>
+                        <p id="resultado-friccion"></p>
+                    </div>
+                </div>
+
+                <!-- Péndulo Simple -->
+                <div class="simulator-card">
+                    <h3>Péndulo Simple</h3>
+                    <canvas id="canvas-pendulo" width="500" height="500"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Longitud L (m):</label>
+                            <input type="range" id="pend-l" min="0.5" max="5" value="2" step="0.1">
+                            <span id="pend-l-value">2 m</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Ángulo Inicial θ₀ (°):</label>
+                            <input type="range" id="pend-theta0" min="5" max="60" value="30" step="1">
+                            <span id="pend-theta0-value">30°</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Masa m (kg):</label>
+                            <input type="range" id="pend-m" min="0.1" max="5" value="1" step="0.1">
+                            <span id="pend-m-value">1 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Gravedad g (m/s²):</label>
+                            <input type="range" id="pend-g" min="1" max="15" value="9.8" step="0.1">
+                            <span id="pend-g-value">9.8 m/s²</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-pend">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas (pequeñas oscilaciones):</h4>
+                        <p>T = 2π√(L/g) (período)</p>
+                        <p>f = 1/T (frecuencia)</p>
+                        <p>ω = √(g/L) (frecuencia angular)</p>
+                        <p>θ(t) = θ₀cos(ωt)</p>
+                        <p id="resultado-pendulo"></p>
+                    </div>
+                </div>
+
+                <!-- Sistema de Poleas -->
+                <div class="simulator-card">
+                    <h3>Sistema de Poleas (Máquina de Atwood)</h3>
+                    <canvas id="canvas-poleas" width="500" height="500"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Masa m₁ (kg):</label>
+                            <input type="range" id="polea-m1" min="1" max="20" value="5" step="0.5">
+                            <span id="polea-m1-value">5 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Masa m₂ (kg):</label>
+                            <input type="range" id="polea-m2" min="1" max="20" value="8" step="0.5">
+                            <span id="polea-m2-value">8 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Gravedad g (m/s²):</label>
+                            <input type="range" id="polea-g" min="1" max="15" value="9.8" step="0.1">
+                            <span id="polea-g-value">9.8 m/s²</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-polea">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>a = g(m₂ - m₁)/(m₁ + m₂)</p>
+                        <p>T = 2m₁m₂g/(m₁ + m₂) (tensión)</p>
+                        <p id="resultado-poleas"></p>
+                    </div>
+                </div>
+
+                <!-- Fuerza Centrípeta -->
+                <div class="simulator-card">
+                    <h3>Fuerza Centrípeta</h3>
+                    <canvas id="canvas-centripeta" width="500" height="400"></canvas>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>Masa m (kg):</label>
+                            <input type="range" id="cent-m" min="1" max="50" value="10" step="1">
+                            <span id="cent-m-value">10 kg</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Radio r (m):</label>
+                            <input type="range" id="cent-r" min="10" max="100" value="50" step="1">
+                            <span id="cent-r-value">50 m</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Velocidad v (m/s):</label>
+                            <input type="range" id="cent-v" min="1" max="30" value="10" step="1">
+                            <span id="cent-v-value">10 m/s</span>
+                        </div>
+                        <button class="btn-animate" id="btn-animate-cent">▶️ Animar</button>
+                    </div>
+                    <div class="results">
+                        <h4>Fórmulas:</h4>
+                        <p>Fᶜ = mv²/r = mω²r</p>
+                        <p>aᶜ = v²/r (aceleración centrípeta)</p>
+                        <p id="resultado-centripeta"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Simulador de Física 1 | Desarrollado con HTML, CSS y JavaScript</p>
+            <p>🎓 Herramienta educativa para visualización de conceptos de física</p>
+        </div>
+    </footer>
+
+    <script src="js/vectores.js"></script>
+    <script src="js/cinematica.js"></script>
+    <script src="js/dinamica.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
